@@ -1,0 +1,59 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Login Service",
+    "description": "Savfi Login Service",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:2727/v1"
+    }
+  ],
+  "paths": {
+    "/login" : {
+      "post": {
+        "security": [{
+          "LoginAuthJWT" :[]
+        }],
+        "tags": ["Login API"],
+        "description": "Login",
+        "summary": "Login",
+        "requestBody": {
+          "content": {
+            "application/json" : {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success Found Phone Number"
+
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login" : {
+        "type": "object",
+        "properties": {
+          "phone_number" : {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "LoginAuthJWT" : {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
